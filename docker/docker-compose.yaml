@@ -1064,8 +1064,6 @@ services:
         hard: ${OPENSEARCH_NOFILE_HARD:-65536}
     volumes:
       - ./volumes/opensearch/data:/usr/share/opensearch/data
-    networks:
-      - opensearch-net
 
   opensearch-dashboards:
     container_name: opensearch-dashboards
@@ -1076,8 +1074,8 @@ services:
       OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
     volumes:
       - ./volumes/opensearch/opensearch_dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml
-    networks:
-      - opensearch-net
+    ports:
+      - 5601:5601
     depends_on:
       - opensearch
 
